@@ -1,6 +1,6 @@
 export function header () {
     return /* html */ `
-    <header class = "flex justify-between">
+    <header class = "flex justify-between h-16 p-1">
         <div class = "logo">
             <img src="" alt="DEV">
         </div>

@@ -1,6 +1,7 @@
-export function sidebar () {
+export function sidebar() {
     return /* html */ `
-        <header>
+    <aside class = "w-64 shrink-0 border-l">
+        <header >
             <div class = "logo">
                 <img src="" alt="DEV">
             </div>
@@ -10,16 +11,16 @@ export function sidebar () {
             </div>
         </header>
         
-        <aside>
-            <ul>
-                <li><a href=""><i></i>الرئيسية</a></li>
-                <li><a href=""><i></i>الرئيسية</a></li>
-                <li><a href=""><i></i>الرئيسية</a></li>
-                <li><a href=""><i></i>الرئيسية</a></li>
-                <li><a href=""><i></i>الرئيسية</a></li>
-                <li><a href=""><i></i>الرئيسية</a></li>
-                <li><a href=""><i></i>الرئيسية</a></li>
-            </ul> 
-        </aside>
+        <ul>
+            <li><a href=""><i></i>الرئيسية</a></li>
+            <li><a href=""><i></i>الرئيسية</a></li>
+            <li><a href=""><i></i>الرئيسية</a></li>
+            <li><a href=""><i></i>الرئيسية</a></li>
+            <li><a href=""><i></i>الرئيسية</a></li>
+            <li><a href=""><i></i>الرئيسية</a></li>
+            <li><a href=""><i></i>الرئيسية</a></li>
+        </ul>
+    </aside> 
+        
     `
 }
