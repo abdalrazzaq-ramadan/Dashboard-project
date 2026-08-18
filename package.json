@@ -11,6 +11,7 @@
     "dev": "npx @tailwindcss/cli -i ./Css/input.css -o ./Css/output.css --watch"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.3.1",
     "@tailwindcss/cli": "^4.3.3",
     "tailwindcss": "^4.3.3"
   }

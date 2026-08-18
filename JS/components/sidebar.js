@@ -1,3 +1,77 @@
+const navItems = [
+    {
+        label : "الرئيسية",
+        icon : "fa-solid fa-house",
+        path : "#"
+    },
+    {
+        label : "المشاريع",
+        icon : "fa-solid fa-folder",
+        path : "#"
+    },
+    {
+        label : "المهام",
+        icon : "fa-solid fa-list-check",
+        path : "#"
+    },
+    {
+        label : "الفريق",
+        icon : "fa-solid fa-users",
+        path : "#"
+    },
+    {
+        label : "التقويم",
+        icon : "fa-solid fa-calendar-days",
+        path : "#"
+    },
+    {
+        label : "التحليلات",
+        icon : "fa-solid fa-square-poll-vertical",
+        path : "#"
+    }
+    
+]
+
+const bottomItems = [
+    {
+        label : "الاشعارات",
+        icon : "fa-solid fa-bell",
+        path : "#"
+    },
+    {
+        label : "الاعدادات",
+        icon : "fa-solid fa-gear",
+        path : "#"
+    },
+    {
+        label : "الملف الشخصي",
+        icon : "fa-solid fa-user",
+        path : "#"
+    }
+]
+
+const navigation = navItems.map(item =>
+    /* html */ `
+        <a href="${item.path}" class = "p-1.5">
+            <i class = "${item.icon}"></i>
+            <span>${item.label}</span>
+        </a>
+    `
+).join("")
+
+const bottom = bottomItems.map(item => 
+    /* html */ `
+        <a href="${item.path}" class = "p-1.5">
+            <i class = "${item.icon}"></i>
+            <span>${item.label}</span>
+        </a>
+    `
+).join("")
+
+console.log(navigation);
+
+
+
 export function sidebar() {
     return /* html */ `
     <aside class = "w-64 shrink-0 border-l flex flex-col justify-between">
@@ -14,53 +88,13 @@ export function sidebar() {
 
         <!--nav-->
         <nav class = "flex flex-1 p-4 flex-col">
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2">
-                <i>⌂</i>
-                <span>الرئيسية</span>
-            </a>
             
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2">
-                <i>⌂</i>
-                <span>الرئيسية</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2">
-                <i>⌂</i>
-                <span>الرئيسية</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2">
-                <i>⌂</i>
-                <span>الرئيسية</span>
-            </a>
-            </a>
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2">
-                <i>⌂</i>
-                <span>الرئيسية</span>
-            </a>
-            </a>
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2">
-                <i>⌂</i>
-                <span>الرئيسية</span>
-            </a>
-
+            ${navigation}
         </nav>
 
         <!--bottom-->
-        <div class = "p-4 border-t">
-            
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2">
-                <i>⌂</i>
-                <span>الاشعارات</span>
-            </a>
-            
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2">
-                <i>⌂</i>
-                <span>الاعدادات</span>
-            </a>
-            
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2">
-                <i>⌂</i>
-                <span>الملف الشخصي</span>
-            </a>
+        <div class = "p-4 border-t flex flex-col">
+            ${bottom}
         </div>
         
     </aside> 
