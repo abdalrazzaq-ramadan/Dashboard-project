@@ -1,80 +1,124 @@
 const navItems = [
     {
+        id : "home",
         label : "الرئيسية",
         icon : "fa-solid fa-house",
-        path : "#"
+        path : "/"
     },
     {
+        id : "projects",
         label : "المشاريع",
         icon : "fa-solid fa-folder",
-        path : "#"
+        path : "/projects"
     },
     {
+        id : "tasks",
         label : "المهام",
         icon : "fa-solid fa-list-check",
-        path : "#"
+        path : "/tasks"
     },
     {
+        id : "team",
         label : "الفريق",
         icon : "fa-solid fa-users",
-        path : "#"
+        path : "/team"
     },
     {
+        id: "calender",
         label : "التقويم",
         icon : "fa-solid fa-calendar-days",
-        path : "#"
+        path : "/calender"
     },
     {
+        id : "analytics",
         label : "التحليلات",
         icon : "fa-solid fa-square-poll-vertical",
-        path : "#"
+        path : "/analytics"
     }
     
 ]
 
 const bottomItems = [
     {
+        id : "notifications",
         label : "الاشعارات",
         icon : "fa-solid fa-bell",
-        path : "#"
+        path : "/notifications"
     },
     {
+        id : "settings",
         label : "الاعدادات",
         icon : "fa-solid fa-gear",
-        path : "#"
+        path : "/settings"
     },
     {
+        id : "profile",
         label : "الملف الشخصي",
         icon : "fa-solid fa-user",
-        path : "#"
+        path : "/profile"
     }
 ]
 
-const navigation = navItems.map(item =>
-    /* html */ `
-        <a href="${item.path}" class = "p-1.5">
+let currentPage = "home";
+//navigation building  
+function renderNavigation (){ 
+    return navItems.map(item =>{
+        //state
+    const isActive = currentPage === item.id;
+    const classes = isActive
+        ? "bg-slate-100 text-slate-900"
+        : "text-slate-600 hover:bg-slate-50"; 
+    return /* html */ `
+        <a href="${item.path}" data-page = "${item.id}" class = "p-1.5 ${classes}">
             <i class = "${item.icon}"></i>
             <span>${item.label}</span>
         </a>
     `
-).join("")
+}).join("")}
 
-const bottom = bottomItems.map(item => 
-    /* html */ `
-        <a href="${item.path}" class = "p-1.5">
+function renderBottom (){ 
+    return bottomItems.map(item =>{
+        //state
+    const isActive = currentPage === item.id;
+    const classes = isActive 
+        ?"bg-slate-100 text-slate-900"
+        :"text-slate-600 hover:bg-slate-50";  
+    return /* html */ `
+        <a href="${item.path}" data-page = "${item.id}" class = "p-1.5 ${classes}">
             <i class = "${item.icon}"></i>
-            <span>${item.label}</span>
+            <span >${item.label}</span>
         </a>
     `
-).join("")
+}).join("")}
 
-console.log(navigation);
+// console.log(navigation);
+
+//End navigation
+
+
+//Sidebar listener
+export function  initSidebar () {
+    const sidebar = document.querySelector("#sidebar");
+    sidebar.addEventListener("click" , event =>{
+        const link = event.target.closest("[data-page]")
+        if(!link) return;
+        event.preventDefault();
+        currentPage = link.dataset.page;
+        updateSidebarNavigation()        
+    })
+}
+function updateSidebarNavigation(){
+    const navigation = document.querySelector("#navigation")
+    const bottomNavigation = document.querySelector("#bottom")
+    navigation.innerHTML = renderNavigation();
+    bottomNavigation.innerHTML = renderBottom(); 
+}
 
 
 
 export function sidebar() {
     return /* html */ `
-    <aside class = "w-64 shrink-0 border-l flex flex-col justify-between">
+    <aside id = "sidebar" class = "w-64 shrink-0 border-l flex flex-col justify-between">
         <!--logo-->
         <header class = "p-4">
             <div class = "logo">
@@ -87,14 +131,14 @@ export function sidebar() {
         </header>
 
         <!--nav-->
-        <nav class = "flex flex-1 p-4 flex-col">
+        <nav id = "navigation" class = "flex flex-1 p-4 flex-col">
             
-            ${navigation}
+            ${renderNavigation()}
         </nav>
 
         <!--bottom-->
-        <div class = "p-4 border-t flex flex-col">
-            ${bottom}
+        <div id = "bottom" class = "p-4 border-t flex flex-col">
+            ${renderBottom()}
         </div>
         
     </aside> 

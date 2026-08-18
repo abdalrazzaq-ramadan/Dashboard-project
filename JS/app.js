@@ -1,5 +1,5 @@
 import { header } from "./components/header.js";
-import { sidebar } from "./components/sidebar.js";
+import { sidebar, initSidebar } from "./components/sidebar.js";
 
 
 const app = document.querySelector("#app");
@@ -22,4 +22,6 @@ app.innerHTML = /* html */ `
             </main>
         </div>
     </div>
-`
+`;
+
+initSidebar()
