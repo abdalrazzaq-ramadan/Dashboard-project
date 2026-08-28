@@ -12,46 +12,55 @@ import{ ProfilePage }from "./pages/Profile.js"
 const routes = {
     home: {
         path: "/",
+        title: "الرئيسية",
         component: DashboardPage
     },
 
     projects: {
         path: "/projects",
+        title: "المشاريع",
         component: ProjectsPage
     },
 
     tasks: {
         path: "/tasks",
+        title: "المهام",
         component: TasksPage
     },
 
     team: {
         path: "/team",
+        title: "الفريق",
         component: TeamPage
     },
 
     calender: {
         path: "/calender",
+        title: "التقويم",
         component: CalenderPage
     },
 
     analytics: {
         path: "/analytics",
+        title: "التحليلات",
         component:AnalyticsPage
     },
 
     notifications: {
         path:"/notifications",
+        title: "الاشعارات",
         component:NotificationPage
     },
 
     settings: {
         path: "/settings",
+        title: "الاعدادات",
         component:SettingsPage
     },
 
     profile: {
         path: "/profile",
+        title: "الحساب الشخصي",
         component:ProfilePage
     }
 };
@@ -96,6 +105,7 @@ function loadRoute(routeId) {
     }
 
     renderRoute(route);
+    updateHeader(route);
 }
 
 window.addEventListener("popstate" , ()=>{
@@ -106,6 +116,12 @@ window.addEventListener("popstate" , ()=>{
 export function initRouter(){
     const routerID = getCurrentRoute();
     loadRoute(routerID);
+}
+
+function updateHeader (rout) {
+    const title = document.getElementById("page-title")
+    if (!title) return;
+    title.textContent = rout.title;
 }
 
 function render404(){
