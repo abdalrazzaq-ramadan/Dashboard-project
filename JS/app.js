@@ -1,5 +1,6 @@
 import { header } from "./components/header.js";
 import { sidebar, initSidebar } from "./components/sidebar.js";
+import { initRouter } from "./Router.js";
 
 
 const app = document.querySelector("#app");
@@ -17,11 +18,12 @@ app.innerHTML = /* html */ `
             
             ${header()}
             
-            <main class = "flex-1 p-1">
-                <h1 class = "text-6xl ">main content</h1>
+            <main id = "page-content" class = "flex-1 p-1">
+                
             </main>
         </div>
     </div>
 `;
 
 initSidebar()
+initRouter()

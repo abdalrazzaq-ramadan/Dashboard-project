@@ -1,3 +1,5 @@
+import { navigate } from "../Router.js";
+import { getCurrentRoute } from "../Router.js";
 const navItems = [
     {
         id : "home",
@@ -59,7 +61,7 @@ const bottomItems = [
     }
 ]
 
-let currentPage = "home";
+let currentPage = getCurrentRoute();
 //navigation building  
 function renderNavigation (){ 
     return navItems.map(item =>{
@@ -104,7 +106,8 @@ export function  initSidebar () {
         if(!link) return;
         event.preventDefault();
         currentPage = link.dataset.page;
-        updateSidebarNavigation()        
+        updateSidebarNavigation()
+        navigate(currentPage);        
     })
 }
 function updateSidebarNavigation(){
