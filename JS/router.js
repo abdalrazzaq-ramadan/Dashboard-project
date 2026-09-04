@@ -1,7 +1,8 @@
 import { DashboardPage } from "./pages/Dashboard.js";
 import { ProjectsPage ,
         initProjectsPage, } from "./pages/Projects.js";
-import { TasksPage } from "./pages/Tasks.js";
+import { TasksPage,
+        initTasksPage} from "./pages/Tasks.js";
 import { TeamPage } from "./pages/Team.js";
 import { CalenderPage } from "./pages/Calender.js";
 import { AnalyticsPage } from "./pages/Analytics.js";
@@ -28,7 +29,8 @@ const routes = {
     tasks: {
         path: "/tasks",
         title: "المهام",
-        component: TasksPage
+        component: TasksPage,
+        init : initTasksPage
     },
 
     team: {
