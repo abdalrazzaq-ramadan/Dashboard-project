@@ -1,5 +1,6 @@
 import { DashboardPage } from "./pages/Dashboard.js";
-import { ProjectsPage } from "./pages/Projects.js";
+import { ProjectsPage ,
+        initProjectsPage, } from "./pages/Projects.js";
 import { TasksPage } from "./pages/Tasks.js";
 import { TeamPage } from "./pages/Team.js";
 import { CalenderPage } from "./pages/Calender.js";
@@ -7,6 +8,7 @@ import { AnalyticsPage } from "./pages/Analytics.js";
 import {NotificationPage} from "./pages/Notifications.js"
 import{ SettingsPage }from "./pages/Settings.js"
 import{ ProfilePage }from "./pages/Profile.js"
+
 
 
 const routes = {
@@ -19,7 +21,8 @@ const routes = {
     projects: {
         path: "/projects",
         title: "المشاريع",
-        component: ProjectsPage
+        component: ProjectsPage,
+        init : initProjectsPage
     },
 
     tasks: {
@@ -106,6 +109,10 @@ function loadRoute(routeId) {
 
     renderRoute(route);
     updateHeader(route);
+
+    if (route.init) {
+        route.init();
+    }
 }
 
 window.addEventListener("popstate" , ()=>{
