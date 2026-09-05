@@ -3,7 +3,8 @@ import { ProjectsPage ,
         initProjectsPage, } from "./pages/Projects.js";
 import { TasksPage,
         initTasksPage} from "./pages/Tasks.js";
-import { TeamPage } from "./pages/Team.js";
+import { TeamPage,
+          initTeamPage } from "./pages/Team.js";
 import { CalenderPage } from "./pages/Calender.js";
 import { AnalyticsPage } from "./pages/Analytics.js";
 import {NotificationPage} from "./pages/Notifications.js"
@@ -36,7 +37,8 @@ const routes = {
     team: {
         path: "/team",
         title: "الفريق",
-        component: TeamPage
+        component: TeamPage,
+        init : initTeamPage
     },
 
     calender: {
