@@ -6,7 +6,8 @@ export const tasks = [
         projectId: "p1",
         status: "in-progress",
         priority: "high",
-        dueDate: "2026-09-10"
+        dueDate: "2026-09-10",
+        assigneeId:"u1"
     },
 
     {
@@ -16,7 +17,8 @@ export const tasks = [
         projectId: "p1",
         status: "todo",
         priority: "medium",
-        dueDate: "2026-09-12"
+        dueDate: "2026-09-12",
+        assigneeId:"u2"
     },
 
     {
@@ -26,7 +28,8 @@ export const tasks = [
         projectId: "p2",
         status: "completed",
         priority: "low",
-        dueDate: "2026-09-08"
+        dueDate: "2026-09-08",
+        assigneeId:"u3"
     },
 
     {
@@ -36,6 +39,7 @@ export const tasks = [
         projectId: "p2",
         status: "todo",
         priority: "medium",
-        dueDate: "2026-09-15"
+        dueDate: "2026-09-15",
+        assigneeId:"u4"
     }
 ];

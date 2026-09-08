@@ -5,7 +5,8 @@ export const projects = [
         description: "إعادة تصميم الموقع وتحسين تجربة المستخدم",
         status: "active",
         progress: 75,
-        deadline: "30 أغسطس"
+        deadline: "30 أغسطس",
+        members : ["u1","u2"]
     },
 
     {
@@ -14,7 +15,8 @@ export const projects = [
         description: "نظام إدارة داخلي لمتابعة المشاريع والمهام",
         status: "completed",
         progress: 100,
-        deadline: "2 سبتمبر"
+        deadline: "2 سبتمبر",
+        members: ["u3","u1"]
     },
 
     {
@@ -23,6 +25,7 @@ export const projects = [
         description: "تطبيق لإدارة المهام اليومية",
         status: "paused",
         progress: 40,
-        deadline: "8 سبتمبر"
+        deadline: "8 سبتمبر",
+        members: ["u2","u3"]
     }
 ];
