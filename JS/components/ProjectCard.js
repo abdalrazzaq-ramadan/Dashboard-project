@@ -1,4 +1,12 @@
+import { members } from "../Data/memberData.js";
+
 export function ProjectCard(project) {
+    const projectMembers = members.filter (member => {
+        return project.members.includes(member.id);
+    }) 
+
+
+    // console.log(projectMembers);
     return /* html */`
         <article class="rounded-xl border border-slate-200 bg-white p-5">
 
@@ -45,6 +53,33 @@ export function ProjectCard(project) {
                 </div>
 
             </div>
+            <!--members-->
+            <div class="mt-4 border-t border-slate-100 pt-4">
+
+                <p class="mb-2 text-xs font-medium text-slate-500">
+                    أعضاء الفريق
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+
+                    ${
+                        projectMembers.length
+                            ? projectMembers.map(member => `
+                                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs            text-slate-600">
+                                    ${member.name}
+                                </span>
+                            `).join("")
+                            : `
+                                <span class="text-xs text-slate-400">
+                                    لم يتم تعيين أعضاء
+                                </span>
+                            `
+                    }
+                
+                </div>
+
+            </div>
+
 
 
             <div class="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
@@ -52,11 +87,13 @@ export function ProjectCard(project) {
                 <span class="text-xs text-slate-400">
                     الموعد: ${project.deadline}
                 </span>
-
-                <a
-                    href="/projects?id=${project.id}"
-                    data-route
-                    class="text-sm font-medium text-slate-600 hover:text-slate-900">التفاصيل</a>
+                <button
+                    data-action="view-project"
+                    data-project-id="${project.id}"
+                >
+                    التفاصيل
+                </button>
+                
             </div>
 
         </article>
