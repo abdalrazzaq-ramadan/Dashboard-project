@@ -1,20 +1,26 @@
 import { projects } from "../Data/projectsData.js";
 import { ProjectCard } from "../components/ProjectCard.js";
 import { ProjectDetails } from "../components/ProjectDetails.js";
+import { CreateProjectModal } from "../components/CreateProjectModal.js";
+import { members } from "../Data/memberData.js";
+import { navigate } from "../router.js";
 
 
     // state 
 const state = {
     searchTerm : "",
-    selectedStatus :"all"
+    selectedStatus :"all",
+    addProject : false
 }
 
 
+//projectDetails listener
+const params = new URLSearchParams(window.location.search);
+const projectId = params.get("id");
+
 export function ProjectsPage() {
-    const params = new URLSearchParams(window.location.search);
 
-    const projectId = params.get("id");
-
+    //project-details render
     const selectedProject = projects.find(
     project => project.id === projectId
     );
@@ -22,6 +28,12 @@ export function ProjectsPage() {
     if (selectedProject) {
         return ProjectDetails(selectedProject)
     }
+
+        // نحن في صفحة التفاصيل
+    if (projectId) {
+        return;
+    }
+    console.log("projectPAge");
 
     return /* html */ `
         <section class="space-y-6">
@@ -93,6 +105,9 @@ export function ProjectsPage() {
             
             </div>
 
+            <!--Modal-->
+            ${CreateProjectModal()}
+
         </section>
     `;
 }
@@ -100,11 +115,12 @@ export function ProjectsPage() {
 function renderProjects() {
     const container = document.querySelector("#projects-list")
     if (!container) return;
+    container.innerHTML = ""
     const filteredProjects = projects.filter(project => {
 
         const matchesSearch =
             project.name
-                .toLowerCase()
+                ?.toLowerCase()
                 .includes(state.searchTerm.toLowerCase());
 
         const matchesStatus =
@@ -124,21 +140,31 @@ function renderProjects() {
 
 
 export function initProjectsPage() {
-    const params = new URLSearchParams(
-        window.location.search
-    );
-
-    const projectId = params.get("id");
-
-    // نحن في صفحة التفاصيل
-    if (projectId) {
-        return;
-    }
 
 
     const searchInput = document.querySelector("#project-search");
     const filterSelect = document.querySelector("#project-filter");
+    const createButton = document.querySelector("#create-project-btn");
+    const modal =document.querySelector("#create-project-modal");
+    const modalForm = document.querySelector("#create-project-form");
 
+    const projectsList =
+    document.querySelector("#projects-list");
+
+    projectsList?.addEventListener("click", event => {
+
+        const button = event.target.closest(
+            '[data-action="view-project"]'
+        );
+
+        if (!button) return;
+
+        const projectId =
+            button.dataset.projectId;
+
+        navigate("projectDetails", projectId);
+    });
+    
 
     searchInput?.addEventListener("input", event => {
 
@@ -157,7 +183,86 @@ export function initProjectsPage() {
 
     });
 
+    createButton?.addEventListener("click" , () => {
+        openCreateProjectModal()
+    })
+
+    modal?.addEventListener("click" , event => {
+        const closeButton = event.target.closest(
+                '[data-action="close-project-modal"]');
+
+        if (!closeButton) return ;
+
+        closeCreateProjectModal()
+    })
+
+    modal?.addEventListener("submit" , event => {
+        event.preventDefault()
+        state.addProject = true;
+
+        const formData = new FormData(modalForm)
+        const data = Object.fromEntries(formData);
+        const selectedMembers = formData.getAll("members")
+
+        //form data
+        const projectData = {
+            name : data.name,
+            description : data.description,
+            status :data.status,
+            deadline : data.deadline,
+            members : selectedMembers
+
+        }
+        // console.log(projectData);
+        const newProject = createProject(projectData)
+        
+        projects.push(newProject)
+        console.log(newProject);
+        console.log(projects);
+
+        renderProjects()
+        closeCreateProjectModal()
+
+    })
+
+    
 
     renderProjects();
 }
 
+
+
+
+
+function openCreateProjectModal() {
+
+    const modal =
+        document.querySelector("#create-project-modal");
+
+    if (!modal) return;
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+}
+
+function closeCreateProjectModal() {
+
+    const modal =
+        document.querySelector("#create-project-modal");
+
+    if (!modal) return;
+
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+}
+
+function createProject (details) {
+    const projectId = projects.length + 1;
+    const project = {
+        id:  `p${projectId}`,
+        progress: 0,
+        ...details
+    }
+
+    return project;
+}

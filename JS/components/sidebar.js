@@ -1,5 +1,5 @@
-import { navigate } from "../Router.js";
-import { getCurrentRoute } from "../Router.js";
+import { navigate } from "../router.js";
+import { getCurrentRoute } from "../router.js";
 const navItems = [
     {
         id : "home",
