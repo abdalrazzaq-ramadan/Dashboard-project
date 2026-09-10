@@ -12,7 +12,8 @@ import {
     TeamPage,
     initTeamPage
 } from "./pages/Team.js";
-import { CalenderPage } from "./pages/Calender.js";
+import { CalenderPage,
+        initCalendarPage} from "./pages/Calender.js";
 import { AnalyticsPage } from "./pages/Analytics.js";
 import { NotificationPage } from "./pages/Notifications.js"
 import { SettingsPage } from "./pages/Settings.js"
@@ -57,7 +58,8 @@ const routes = {
     calender: {
         path: "/calender",
         title: "التقويم",
-        component: CalenderPage
+        component: CalenderPage,
+        init : initCalendarPage
     },
 
     analytics: {
