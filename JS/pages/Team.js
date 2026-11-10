@@ -1,5 +1,6 @@
 import { MemberCard } from "../components/MemberCard.js";
 import { members } from "../Data/memberData.js";
+import { AddMemberModal } from "../components/AddMemberModal.js";
 
 //filter&&search-state
 
@@ -75,6 +76,10 @@ export function TeamPage() {
             >
             </div>
 
+            <!--Modal-->
+
+            ${AddMemberModal()}
+
         </section>
     `;
 }
@@ -102,6 +107,9 @@ export function initTeamPage () {
     const searchInput = document.querySelector("#member-search")
     const filterSelect = document.querySelector("#member-filter")
     const membersContainer = document.querySelector("#members-list")
+    const addMember = document.querySelector("#create-member-btn")
+    const addMemberModal = document.querySelector("#create-member-modal")
+    const modalForm = document.querySelector("#create-member-form")
 
     searchInput?.addEventListener("input" , event => {
         state.searchTerm = event.target.value;
@@ -134,7 +142,63 @@ export function initTeamPage () {
         changeStatus(memberId,option);
     })
 
+    addMember?.addEventListener("click" , e => {
+        openModal();
+    }
+    )
+
+    addMemberModal?.addEventListener("click" , e => {
+        const button = e.target.closest('[data-action= "close-member-modal"]')
+        if (!button) {return}
+        closeModal()
+    })
+
+    addMemberModal?.addEventListener("submit" , e => {
+        e.preventDefault();
+
+        const formData = new FormData(modalForm);
+        const data = Object.fromEntries(formData);
+
+        const memberData = {
+            name : data.name,
+            role : data.role,
+            email : data.email,
+            status : data.status
+        }
+
+        const newMember = createNewMember(memberData);
+
+        members.push(newMember);
+
+        renderMembers();
+        closeModal()
+    })
+
     renderMembers()
+}
+
+const openModal = () => {
+    const addMemberModal = document.querySelector("#create-member-modal")
+    if (!addMemberModal){return};
+    addMemberModal.classList.add("flex");
+    addMemberModal.classList.remove("hidden");}
+
+const closeModal = () => {
+    const addMemberModal = document.querySelector("#create-member-modal")
+    if (!addMemberModal){return};
+    addMemberModal.classList.add("hidden");
+    addMemberModal.classList.remove("flex");
+
+}
+
+const createNewMember = (details) => {
+    const memberId = members.length + 1;
+    const member = {
+        id : `u-${memberId}`,
+        ...details
+    }
+
+    return member;
 }
 
 function deleteMember (memberId){
