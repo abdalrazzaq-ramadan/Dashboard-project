@@ -20,6 +20,7 @@ import { SettingsPage } from "./pages/Settings.js"
 import { ProfilePage } from "./pages/Profile.js"
 import { projects } from "./Data/projectsData.js";
 import { initAnalyticsPage } from "./pages/Analytics.js";
+import { initNotificationsPage } from "./pages/Notifications.js";
 
 
 const routes = {
@@ -73,7 +74,8 @@ const routes = {
     notifications: {
         path: "/notifications",
         title: "الاشعارات",
-        component: NotificationPage
+        component: NotificationPage,
+        init : initNotificationsPage
     },
 
     settings: {
