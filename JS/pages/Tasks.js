@@ -1,5 +1,6 @@
 import { tasks } from "../Data/tasksData.js";
 import { TaskCard } from "../components/TaskCard.js"
+import { CreateTaskModal } from "../components/CreateTaskModal.js";
 
 //state
 let state = {
@@ -23,7 +24,7 @@ export function TasksPage() {
                 </div>
 
                 <button
-                    id="create-project-btn"
+                    id="create-task-btn"
                     class="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800"
                 >
                     <i class="fa-solid fa-plus"></i>
@@ -65,6 +66,10 @@ export function TasksPage() {
         <section id = "tasks-list" class = "grid grid-cols-4 gap-0.5">
             
         </section>
+        <!--modal-->
+        <article>
+            ${CreateTaskModal()}
+        </article>
     `;
 }
 
@@ -73,7 +78,7 @@ function renderTasks() {
     if (!container) return;
     const filteredTasks = tasks.filter(task => {
         const matchesSearch = task.title
-            .toLowerCase()
+            ?.toLowerCase()
             .includes(state.searchTerm);
 
         const matchesStatus = state.selectedStatus === "all" ||
@@ -94,6 +99,9 @@ export function initTasksPage() {
     const filterInput = document.querySelector("#task-filter")
     const searchInput = document.querySelector("#task-search")
     const tasksContainer = document.querySelector("#tasks-list")
+    const createTaskBtn = document.querySelector("#create-task-btn")
+    const modal = document.querySelector ("#create-task-modal")
+    const modalForm = document.querySelector("#create-task-form")
 
     searchInput?.addEventListener("input", event => {
         state.searchTerm = event.target.value;
@@ -129,6 +137,45 @@ export function initTasksPage() {
         changeTasksStatus(taskId, option)
     })
 
+    createTaskBtn?.addEventListener("click" ,() => {
+        openTaskModal()
+        console.log("clicked");
+    } )
+
+    modal?.addEventListener("click" , event => {
+        const closeBtn = event.target.closest('[data-action = "close-task-modal"]')
+        if(!closeBtn) return ;
+
+        closeTaskModal()
+    })
+
+    modal?.addEventListener("submit" , e => {
+        e.preventDefault();
+
+        const formData = new FormData(modalForm);
+        const data = Object.fromEntries(formData);
+
+        const taskData = {
+            title : data.title,
+            description : data.description,
+            status : data.status,
+            priority : data.priority,
+            dueDate : data.deadline,
+            assigneeId : data.member,
+        }
+
+        console.log(taskData);
+
+        const newTask = createTask(taskData);
+
+        tasks.push(newTask)
+
+        renderTasks();
+        closeTaskModal();
+    })
+
+    
+
     renderTasks();
 }
 
@@ -149,4 +196,32 @@ function changeTasksStatus(taskId, newStatus) {
     task.status = newStatus;
 
     renderTasks();
+}
+
+function openTaskModal () {
+    const modal = document.querySelector("#create-task-modal");
+
+    if (!modal) return ;
+
+    modal.classList.add("flex")
+    modal.classList.remove("hidden")
+}
+
+function closeTaskModal () {
+    const modal = document.querySelector("#create-task-modal");
+
+    if(!modal) return ;
+
+    modal.classList.add("hidden")
+    modal.classList.remove("flex")
+}
+
+function createTask (details) {
+    const taskId = tasks.length + 1;
+    const newTask = {
+        id : `t-${taskId}`,
+        ...details
+    }
+
+    return newTask;
 }

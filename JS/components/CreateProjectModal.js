@@ -11,10 +11,10 @@ export function CreateProjectModal() {
     return /* html */ `
         <div
             id="create-project-modal"
-            class="fixed  inset-0 z-50 hidden items-center justify-center bg-black/40 p-4  "
+            class="fixed  inset-0 z-50 hidden  items-center justify-center bg-black/40 p-4  "
         >
 
-            <div class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
+            <div class="w-full max-w-lg max-h-[85vh] flex flex-col rounded-2xl bg-white shadow-xl overflow-hidden p-6">
 
                 <!-- Header -->
                 <div class="flex items-center justify-between">
@@ -41,7 +41,7 @@ export function CreateProjectModal() {
 
 
                 <!-- Form -->
-                <form id="create-project-form" class="mt-6 space-y-4">
+                <form id="create-project-form" class="overflow-auto mt-6 space-y-4">
 
                     <!-- Name -->
                     <div>
