@@ -21,6 +21,7 @@ import { ProfilePage } from "./pages/Profile.js"
 import { projects } from "./Data/projectsData.js";
 import { initAnalyticsPage } from "./pages/Analytics.js";
 import { initNotificationsPage } from "./pages/Notifications.js";
+import { initSettingsPage } from "./pages/Settings.js";
 
 
 const routes = {
@@ -81,7 +82,8 @@ const routes = {
     settings: {
         path: "/settings",
         title: "الاعدادات",
-        component: SettingsPage
+        component: SettingsPage,
+        init: initSettingsPage
     },
 
     profile: {
