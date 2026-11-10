@@ -19,6 +19,7 @@ import { NotificationPage } from "./pages/Notifications.js"
 import { SettingsPage } from "./pages/Settings.js"
 import { ProfilePage } from "./pages/Profile.js"
 import { projects } from "./Data/projectsData.js";
+import { initAnalyticsPage } from "./pages/Analytics.js";
 
 
 const routes = {
@@ -65,7 +66,8 @@ const routes = {
     analytics: {
         path: "/analytics",
         title: "التحليلات",
-        component: AnalyticsPage
+        component: AnalyticsPage,
+        init: initAnalyticsPage
     },
 
     notifications: {
