@@ -22,6 +22,7 @@ import { projects } from "./Data/projectsData.js";
 import { initAnalyticsPage } from "./pages/Analytics.js";
 import { initNotificationsPage } from "./pages/Notifications.js";
 import { initSettingsPage } from "./pages/Settings.js";
+import { initProfilePage } from "./pages/Profile.js";
 
 
 const routes = {
@@ -89,7 +90,8 @@ const routes = {
     profile: {
         path: "/profile",
         title: "الحساب الشخصي",
-        component: ProfilePage
+        component: ProfilePage,
+        init : initProfilePage
     }
 };
 
