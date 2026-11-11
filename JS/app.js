@@ -1,6 +1,7 @@
 import { header } from "./components/header.js";
 import { sidebar, initSidebar } from "./components/sidebar.js";
 import { initRouter } from "./router.js";
+import { initNavigation } from "./router.js";
 
 
 const app = document.querySelector("#app");
@@ -25,6 +26,6 @@ app.innerHTML = /* html */ `
         </div>
     </div>
 `;
-
-initSidebar()
-initRouter()
+initNavigation();
+initSidebar();
+initRouter();

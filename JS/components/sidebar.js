@@ -1,5 +1,6 @@
 import { navigate } from "../router.js";
 import { getCurrentRoute } from "../router.js";
+import { initNavigation } from "../router.js";
 const navItems = [
     {
         id : "home",
@@ -63,7 +64,7 @@ const bottomItems = [
 
 let currentPage = getCurrentRoute();
 //navigation building  
-function renderNavigation (){ 
+function renderNavigation (currentPage){ 
     return navItems.map(item =>{
         //state
     const isActive = currentPage === item.id;
@@ -78,7 +79,7 @@ function renderNavigation (){
     `
 }).join("")}
 
-function renderBottom (){ 
+function renderBottom (currentPage){ 
     return bottomItems.map(item =>{
         //state
     const isActive = currentPage === item.id;
@@ -121,17 +122,8 @@ export function initSidebar() {
     overlay.addEventListener("click", closeSidebar);
 
     sidebar.addEventListener("click", event => {
-        const link = event.target.closest("[data-page]");
-
-        if (!link) return;
-
-        event.preventDefault();
-
-        currentPage = link.dataset.page;
-
-        updateSidebarNavigation();
-
-        navigate(currentPage);
+        
+        initNavigation()
 
         if (window.innerWidth < 1024) {
             closeSidebar();
@@ -145,11 +137,11 @@ export function initSidebar() {
     });
 }
 
-function updateSidebarNavigation(){
+export function updateSidebarNavigation(currentPage){
     const navigation = document.querySelector("#navigation")
     const bottomNavigation = document.querySelector("#bottom")
-    navigation.innerHTML = renderNavigation();
-    bottomNavigation.innerHTML = renderBottom(); 
+    navigation.innerHTML = renderNavigation(currentPage);
+    bottomNavigation.innerHTML = renderBottom(currentPage); 
 }
 
 

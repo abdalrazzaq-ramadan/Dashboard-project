@@ -24,6 +24,9 @@ import { initNotificationsPage } from "./pages/Notifications.js";
 import { initSettingsPage } from "./pages/Settings.js";
 import { initProfilePage } from "./pages/Profile.js";
 
+import { updateSidebarNavigation } from "./components/sidebar.js";
+
+
 
 const routes = {
     home: {
@@ -94,6 +97,31 @@ const routes = {
         init : initProfilePage
     }
 };
+
+let currentPage = getCurrentRoute();
+
+//navigation when clicking
+export function initNavigation() {
+    document.addEventListener("click", event => {
+        const link = event.target.closest("[data-page]");
+
+        if (!link) return;
+
+        event.preventDefault();
+
+        currentPage = link.dataset.page;
+
+        updateSidebarNavigation(currentPage);
+
+        navigate(currentPage);
+    });
+}
+
+//update the sidebar state when navigate throw url
+document.addEventListener("DOMContentLoaded", () => {
+    updateSidebarNavigation(currentPage);
+});
+
 
 export function getCurrentRoute() {
     const path = window.location.pathname;
