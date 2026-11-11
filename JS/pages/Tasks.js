@@ -63,7 +63,7 @@ export function TasksPage() {
 
         </div>
         <!--tasks cards-->        
-        <section id = "tasks-list" class = "grid grid-cols-4 gap-0.5">
+        <section id = "tasks-list" class = "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-0.5">
             
         </section>
         <!--modal-->
