@@ -99,17 +99,52 @@ function renderBottom (){
 
 
 //Sidebar listener
-export function  initSidebar () {
+
+export function initSidebar() {
     const sidebar = document.querySelector("#sidebar");
-    sidebar.addEventListener("click" , event =>{
-        const link = event.target.closest("[data-page]")
-        if(!link) return;
+    const overlay = document.querySelector("#sidebar-overlay");
+    const toggleButton = document.querySelector("#sidebar-toggle");
+
+    if (!sidebar || !overlay || !toggleButton) return;
+
+    function openSidebar() {
+        sidebar.classList.remove("translate-x-full");
+        overlay.classList.remove("hidden");
+    }
+
+    function closeSidebar() {
+        sidebar.classList.add("translate-x-full");
+        overlay.classList.add("hidden");
+    }
+
+    toggleButton.addEventListener("click", openSidebar);
+    overlay.addEventListener("click", closeSidebar);
+
+    sidebar.addEventListener("click", event => {
+        const link = event.target.closest("[data-page]");
+
+        if (!link) return;
+
         event.preventDefault();
+
         currentPage = link.dataset.page;
-        updateSidebarNavigation()
-        navigate(currentPage);        
-    })
+
+        updateSidebarNavigation();
+
+        navigate(currentPage);
+
+        if (window.innerWidth < 1024) {
+            closeSidebar();
+        }
+    });
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth >= 1024) {
+            closeSidebar();
+        }
+    });
 }
+
 function updateSidebarNavigation(){
     const navigation = document.querySelector("#navigation")
     const bottomNavigation = document.querySelector("#bottom")
@@ -119,32 +154,57 @@ function updateSidebarNavigation(){
 
 
 
+
 export function sidebar() {
     return /* html */ `
-    <aside id = "sidebar" class = "w-64 shrink-0 border-l flex flex-col justify-between">
-        <!--logo-->
-        <header class = "p-4">
-            <div class = "logo">
-                <img src="" alt="DEV">
-            </div>
-            <div class = "title">
-                <h1>DevFlow</h1>
-                <p>إدارة مشاريع احترافية</p>
-            </div>
-        </header>
+        <!-- Mobile overlay -->
+        <div
+            id="sidebar-overlay"
+            class="fixed inset-0 z-40 hidden bg-black/40 lg:hidden"
+        ></div>
 
-        <!--nav-->
-        <nav id = "navigation" class = "flex flex-1 p-4 flex-col">
-            
-            ${renderNavigation()}
-        </nav>
+        <aside
+            id="sidebar"
+            class="fixed inset-y-0 right-0 z-50 flex w-64
+                   shrink-0 flex-col justify-between
+                   border-l border-slate-200 bg-white
+                   transition-transform duration-300
+                   translate-x-full
+                   lg:static lg:translate-x-0"
+        >
+            <!-- Logo -->
+            <header class="border-b border-slate-100 p-4">
+                <div class="flex items-center gap-3">
+                    <div class="flex h-10 w-10 items-center
+                                justify-center rounded-xl
+                                bg-[#075E66] text-white">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
 
-        <!--bottom-->
-        <div id = "bottom" class = "p-4 border-t flex flex-col">
-            ${renderBottom()}
-        </div>
-        
-    </aside> 
-        
-    `
+                    <div>
+                        <h1 class="font-bold text-slate-800">DevFlow</h1>
+                        <p class="text-xs text-slate-400">
+                            إدارة مشاريع احترافية
+                        </p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Navigation -->
+            <nav
+                id="navigation"
+                class="flex flex-1 flex-col gap-2 overflow-y-auto p-4"
+            >
+                ${renderNavigation()}
+            </nav>
+
+            <!-- Bottom -->
+            <div
+                id="bottom"
+                class="flex flex-col gap-2 border-t border-slate-100 p-4"
+            >
+                ${renderBottom()}
+            </div>
+        </aside>
+    `;
 }

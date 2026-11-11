@@ -9,16 +9,17 @@ console.log(app);
 app.innerHTML = /* html */ `
     
 
-    <div class = "flex min-h-screen">
+    <div class = "flex h-screen overflow-hidden bg-slate-50">
 
         ${sidebar()}
         
 
-        <div class = "flex-1 min-w-0 flex-col ">
+        <div class = "flex min-w-0 flex-1 flex-col overflow-hidden">
             
             ${header()}
             
-            <main id = "page-content" class = "flex-1 p-1">
+            <main id = "page-content" class = "min-h-0 min-w-0 flex-1 overflow-y-auto
+                   overflow-x-hidden p-3 sm:p-5 lg:p-6">
                 
             </main>
         </div>
