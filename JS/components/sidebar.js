@@ -122,8 +122,6 @@ export function initSidebar() {
     overlay.addEventListener("click", closeSidebar);
 
     sidebar.addEventListener("click", event => {
-        
-        initNavigation()
 
         if (window.innerWidth < 1024) {
             closeSidebar();

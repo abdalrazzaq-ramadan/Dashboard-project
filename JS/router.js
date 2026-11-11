@@ -118,7 +118,8 @@ export function initNavigation() {
 }
 
 //update the sidebar state when navigate throw url
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", (e) => {
+    e.preventDefault()
     updateSidebarNavigation(currentPage);
 });
 
@@ -242,6 +243,7 @@ function loadRoute(routeId) {
 window.addEventListener("popstate", () => {
     const routeID = getCurrentRoute();
     loadRoute(routeID);
+    updateSidebarNavigation(routeID)
 })
 
 export function initRouter() {
