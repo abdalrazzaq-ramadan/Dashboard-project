@@ -9,6 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx @tailwindcss/cli -i ./Css/input.css -o ./Css/output.css --watch",
+    "build": "npx @tailwindcss/cli -i ./Css/input.css -o ./Css/output.css --minify",
     "start": "node server.js"
   },
   "dependencies": {
