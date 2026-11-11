@@ -30,7 +30,7 @@ export function ProjectRow(project) {
                     <div class="h-2 flex-1 rounded-full bg-slate-100">
 
                         <div
-                            class="h-2 rounded-full bg-slate-700"
+                            class="h-2 rounded-full bg-teal-500"
                             style="width: ${project.progress}%"
                         ></div>
 

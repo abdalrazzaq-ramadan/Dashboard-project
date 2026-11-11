@@ -48,7 +48,7 @@ export function ProjectDetails(project) {
                 <div class="h-2 overflow-hidden rounded-full bg-slate-100">
 
                     <div
-                        class="h-full rounded-full bg-slate-700"
+                        class="h-full rounded-full bg-teal-500"
                         style="width: ${project.progress}%"
                     ></div>
 

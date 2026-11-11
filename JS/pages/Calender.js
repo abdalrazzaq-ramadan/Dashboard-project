@@ -208,7 +208,7 @@ function renderCalendar() {
         console.log(dayEvents);
 
         const todayClass = isToday
-            ? "bg-teal-50 font-bold text-teal-700"
+            ? "bg-teal-100 font-bold text-teal-700"
             : "";
         grid.innerHTML += /* html */ `
             <div class="min-h-28 border-b border-l border-slate-100 p-3 ${todayClass}">

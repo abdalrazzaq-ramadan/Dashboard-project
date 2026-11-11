@@ -31,13 +31,13 @@ export function AnalyticsSection() {
                 <!-- Chart placeholder -->
                 <div class="mt-6 flex h-64 items-end gap-4 border-b border-slate-200 px-4">
 
-                    <div class="h-[40%] flex-1 rounded-t bg-slate-200"></div>
-                    <div class="h-[65%] flex-1 rounded-t bg-slate-200"></div>
-                    <div class="h-[50%] flex-1 rounded-t bg-slate-200"></div>
-                    <div class="h-[80%] flex-1 rounded-t bg-slate-200"></div>
-                    <div class="h-[70%] flex-1 rounded-t bg-slate-200"></div>
-                    <div class="h-[90%] flex-1 rounded-t bg-slate-200"></div>
-                    <div class="h-[60%] flex-1 rounded-t bg-slate-200"></div>
+                    <div class="shadow-xl shadow-slate-200 h-[40%] flex-1 rounded-t bg-teal-200"></div>
+                    <div class="shadow-xl shadow-slate-200 h-[65%] flex-1 rounded-t bg-teal-200"></div>
+                    <div class="shadow-xl shadow-slate-200 h-[50%] flex-1 rounded-t bg-teal-200"></div>
+                    <div class="shadow-xl shadow-slate-200 h-[80%] flex-1 rounded-t bg-teal-200"></div>
+                    <div class="shadow-xl shadow-slate-200 h-[70%] flex-1 rounded-t bg-teal-200"></div>
+                    <div class="shadow-xl shadow-slate-200 h-[90%] flex-1 rounded-t bg-teal-200"></div>
+                    <div class="shadow-xl shadow-slate-200 h-[60%] flex-1 rounded-t bg-teal-200"></div>
 
                 </div>
 

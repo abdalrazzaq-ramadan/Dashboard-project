@@ -9,7 +9,7 @@ export function StatCard (stat) {
             ? "text-emerald-600"
             : "text-red-600";
     return /* html */ `
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
+        <div class="cursor-pointer rounded-xl border border-slate-200 bg-white p-5 hover:transition-all  hover:shadow-2xl shadow-teal-100">
 
             <div class="flex items-center justify-between">
 
@@ -18,7 +18,7 @@ export function StatCard (stat) {
                 </p>
 
                 <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
-                    <i class="fa-solid ${stat.icon} text-slate-600"></i>
+                    <i class="fa-solid ${stat.icon} text-teal-700"></i>
                 </div>
 
             </div>

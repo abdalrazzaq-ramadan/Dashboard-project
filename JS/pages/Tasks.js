@@ -25,7 +25,7 @@ export function TasksPage() {
 
                 <button
                     id="create-task-btn"
-                    class="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-800"
+                    class="inline-flex items-center justify-center gap-2 rounded-lg bg-teal-800 px-4 py-2.5 text-sm font-medium text-white hover:bg-teal-700"
                 >
                     <i class="fa-solid fa-plus"></i>
 
